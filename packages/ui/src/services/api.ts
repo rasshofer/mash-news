@@ -11,15 +11,15 @@ const request = async <T>(
   const headers: RequestInit['headers'] = {
     'content-type': 'application/json',
   };
-  const targetUrl = new URL(
-    `${process.env.REACT_APP_API_ENDPOINT ?? ''}${url}`
+  const response = await fetch(
+    `${process.env.REACT_APP_API_ENDPOINT ?? ''}${url}`,
+    {
+      method: options?.method,
+      headers,
+      body: JSON.stringify(options?.data),
+      mode: 'cors',
+    }
   );
-  const response = await fetch(targetUrl.toString(), {
-    method: options?.method,
-    headers,
-    body: JSON.stringify(options?.data),
-    mode: 'cors',
-  });
   if (!response.ok) {
     return Promise.reject(new Error(response.statusText));
   }
