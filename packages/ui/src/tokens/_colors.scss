@@ -1,0 +1,27 @@
+@mixin color-tokens-light {
+  --color-background: #aaa;
+  --color-content: #fff;
+  --color-text: #000;
+  --color-text-passive: rgba(0, 0, 0, var(--opacity-medium));
+  --color-shadow: rgba(0, 0, 0, var(--opacity-low));
+  --color-elevation: rgba(0, 0, 0, var(--opacity-high));
+  --color-on-elevation: #fff;
+}
+
+@mixin color-tokens-dark {
+  --color-background: #111;
+  --color-content: #000;
+  --color-text: #fff;
+  --color-text-passive: rgba(255, 255, 255, var(--opacity-medium));
+  --color-shadow: rgba(255, 255, 255, var(--opacity-low));
+  --color-elevation: rgba(0, 0, 0, var(--opacity-high));
+  --color-on-elevation: #fff;
+}
+
+@mixin color-tokens {
+  @include color-tokens-light;
+
+  @media (prefers-color-scheme: dark) {
+    @include color-tokens-dark;
+  }
+}

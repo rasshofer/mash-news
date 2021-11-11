@@ -1,0 +1,15 @@
+@import './breakpoints';
+@import './spacings';
+@import './colors';
+@import './fonts';
+@import './radii';
+@import './opacities';
+
+:root {
+  @include breakpoint-tokens;
+  @include spacing-tokens;
+  @include color-tokens;
+  @include font-tokens;
+  @include radius-tokens;
+  @include opacity-tokens;
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "lib": ["ES2019"]
+  },
+  "include": ["./**/*.ts"]
+}

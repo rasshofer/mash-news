@@ -1,0 +1,9 @@
+@import './tokens/colors';
+@import './tokens/fonts';
+@import './tokens/breakpoints';
+@import './tokens/spacings';
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}

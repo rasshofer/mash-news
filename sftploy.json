@@ -1,0 +1,5 @@
+{
+  "localRoot": "deploy",
+  "remoteRoot": "/",
+  "exclude": [".DS_Store"]
+}

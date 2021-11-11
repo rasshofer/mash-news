@@ -1,0 +1,26 @@
+.navigation__items {
+  list-style: none;
+}
+
+.navigation__item {
+  ~ .navigation__item {
+    margin-top: 0.25rem;
+  }
+}
+
+.navigation__link {
+  display: block;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  color: var(--color-text);
+  border-radius: var(--radius-full);
+  transition: background 200ms ease;
+
+  &:hover {
+    background: var(--color-shadow);
+  }
+
+  &.navigation__link--active {
+    background: var(--color-shadow);
+  }
+}
