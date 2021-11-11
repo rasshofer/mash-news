@@ -30,6 +30,8 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Build
+        env:
+          REACT_APP_API_ENDPOINT: /api
         run: yarn build
 
       - name: Deploy
@@ -38,5 +40,4 @@ jobs:
           SFTPLOY_PORT: ${{ secrets.SFTPLOY_PORT }}
           SFTPLOY_USERNAME: ${{ secrets.SFTPLOY_USERNAME }}
           SFTPLOY_PASSWORD: ${{ secrets.SFTPLOY_PASSWORD }}
-          REACT_APP_API_ENDPOINT: /api
         run: yarn deploy
