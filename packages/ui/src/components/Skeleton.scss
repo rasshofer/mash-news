@@ -9,7 +9,7 @@
     'nav'
     'footer';
 
-  @include respond-medium-up {
+  @include respond-large-up {
     grid-template-areas:
       'header main'
       'nav main'

@@ -1,3 +1,13 @@
+@import '../tokens/breakpoints';
+
+.navigation {
+  @include respond-large-up {
+    position: sticky;
+    top: var(--spacing);
+    bottom: var(--spacing);
+  }
+}
+
 .navigation__items {
   list-style: none;
 }
