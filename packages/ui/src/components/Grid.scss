@@ -34,7 +34,7 @@
       padding-top: 80%;
     }
 
-    .grid__title {
+    .grid__content {
       position: absolute;
       left: 0;
       bottom: 0;
@@ -61,15 +61,22 @@
   transform: translate(-50%, -50%);
 }
 
-.grid__title {
+.grid__content {
   position: relative;
   z-index: 2;
   margin-top: auto;
   padding: var(--spacing);
-  color: var(--color-on-elevation);
-  text-shadow: 0 0 0.5rem var(--color-shadow), 0 0 0.5rem var(--color-shadow);
 
   @include respond-medium-up {
     padding: calc(var(--spacing) / 1.5);
   }
+}
+
+.grid__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  color: var(--color-on-elevation);
+  text-shadow: 0 0 0.5rem var(--color-shadow), 0 0 0.5rem var(--color-shadow);
+  overflow: hidden;
 }

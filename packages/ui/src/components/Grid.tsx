@@ -29,7 +29,9 @@ export const Grid: FC<GridProps> = ({ items }) => {
               />
             </div>
           ) : null}
-          <div className="grid__title">{item.title}</div>
+          <div className="grid__content">
+            <div className="grid__title">{item.title}</div>
+          </div>
         </a>
       ))}
     </div>
