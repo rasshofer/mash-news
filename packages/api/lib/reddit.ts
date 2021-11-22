@@ -5,55 +5,72 @@ import { hashId, isValidUrl } from './utils';
 
 const LIMIT = 100;
 
+type RedditItem = {
+  data: {
+    title: string;
+    permalink: string;
+    downs: number;
+    ups: number;
+    score: number;
+    created: number;
+    thumbnail: 'self' | string;
+    secure_media?: {
+      type: string;
+      oembed: {
+        provider_url: string;
+        version: string;
+        type: string;
+        title: string;
+        html: string;
+        author_name: string;
+        provider_name: string;
+        thumbnail_url: string;
+      };
+    };
+    preview?: {
+      images: [
+        {
+          source: {
+            url: string;
+            width: number;
+            height: number;
+          };
+          resolutions: {
+            url: string;
+            width: number;
+            height: number;
+          }[];
+        }
+      ];
+    };
+    url: string;
+    post_hint?: 'image' | 'link' | 'self' | 'hosted:video' | 'rich:video';
+    is_video?: boolean;
+  };
+};
+
 export type RedditResult = {
   data: {
-    children: {
-      data: {
-        title: string;
-        permalink: string;
-        downs: number;
-        ups: number;
-        score: number;
-        created: number;
-        thumbnail: 'self' | string;
-        secure_media?: {
-          type: string;
-          oembed: {
-            provider_url: string;
-            version: string;
-            type: string;
-            title: string;
-            html: string;
-            author_name: string;
-            provider_name: string;
-            thumbnail_url: string;
-          };
-        };
-        preview?: {
-          images: [
-            {
-              source: {
-                url: string;
-                width: number;
-                height: number;
-              };
-              resolutions: {
-                url: string;
-                width: number;
-                height: number;
-              }[];
-            }
-          ];
-        };
-        url: string;
-      };
-    }[];
+    children: RedditItem[];
   };
 };
 
 export type RedditProps = {
   mode?: 'hot' | 'new' | 'random' | 'rising';
   subreddit?: string;
+};
+
+const getContentType = (item: RedditItem): Item['type'] => {
+  if (
+    item.data.is_video ||
+    (item.data.post_hint && item.data.post_hint.endsWith(':video'))
+  ) {
+    return 'video';
+  }
+  if (item.data.post_hint === 'image') {
+    return 'image';
+  }
+  return 'article';
 };
 
 export const handler =
@@ -74,6 +91,7 @@ export const handler =
 
         return {
           id: hashId('reddit', item.data.permalink),
+          type: getContentType(item),
           url: decode(item.data.url),
           title: decode(item.data.title),
           image:

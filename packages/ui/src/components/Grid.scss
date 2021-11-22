@@ -66,6 +66,8 @@
   z-index: 2;
   margin-top: auto;
   padding: var(--spacing);
+  text-shadow: 0 0 0.5rem var(--color-elevation),
+    0 0 0.5rem var(--color-elevation);
 
   @include respond-medium-up {
     padding: calc(var(--spacing) / 1.5);
@@ -77,6 +79,5 @@
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   color: var(--color-on-elevation);
-  text-shadow: 0 0 0.5rem var(--color-shadow), 0 0 0.5rem var(--color-shadow);
   overflow: hidden;
 }

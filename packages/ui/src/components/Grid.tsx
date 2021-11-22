@@ -3,6 +3,17 @@ import { Item } from '../services/topics';
 
 import './Grid.scss';
 
+const getEmojiForType = (type: Item['type']): string => {
+  switch (type) {
+    case 'image':
+      return '🖼️';
+    case 'video':
+      return '📺️';
+    default:
+      return '📄';
+  }
+};
+
 export type GridProps = {
   items: Item[];
 };
@@ -30,6 +41,7 @@ export const Grid: FC<GridProps> = ({ items }) => {
             </div>
           ) : null}
           <div className="grid__content">
+            <div className="grid__type">{getEmojiForType(item.type)}</div>
             <div className="grid__title">{item.title}</div>
           </div>
         </a>

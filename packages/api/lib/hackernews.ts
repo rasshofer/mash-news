@@ -42,6 +42,7 @@ export const handler =
       .map(
         (item): Item => ({
           id: hashId('hackernews', String(item.id)),
+          type: 'article',
           url: item.url ?? `https://news.ycombinator.com/item?id=${item.id}`,
           title: decode(item.title),
           score: item.score || 0,

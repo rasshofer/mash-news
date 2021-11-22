@@ -2,6 +2,7 @@ import { get } from './api';
 
 export type Item = {
   id: string;
+  type: 'article' | 'image' | 'video';
   url: string;
   title: string;
   image?: {
