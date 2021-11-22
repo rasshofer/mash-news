@@ -26,17 +26,13 @@ const EVERYTHING_TOPIC = {
 
     writeFileSync(
       resolve(TOPICS_DIR, `${slug}.json`),
-      JSON.stringify(
-        {
-          slug,
-          emoji,
-          title,
-          items: sliceItems(sortItems(getUniqueItems(items))),
-          built: new Date(),
-        },
-        null,
-        2
-      )
+      JSON.stringify({
+        slug,
+        emoji,
+        title,
+        items: sliceItems(sortItems(getUniqueItems(items))),
+        built: new Date(),
+      })
     );
 
     console.log(
@@ -50,15 +46,11 @@ const EVERYTHING_TOPIC = {
 
   writeFileSync(
     resolve(TOPICS_DIR, 'everything.json'),
-    JSON.stringify(
-      {
-        ...EVERYTHING_TOPIC,
-        items: sliceItems(sortItems(getUniqueItems(everything))),
-        built: new Date(),
-      },
-      null,
-      2
-    )
+    JSON.stringify({
+      ...EVERYTHING_TOPIC,
+      items: sliceItems(sortItems(getUniqueItems(everything))),
+      built: new Date(),
+    })
   );
 
   console.log(
@@ -78,14 +70,10 @@ const EVERYTHING_TOPIC = {
 
   writeFileSync(
     resolve(DIST_DIR, 'config.json'),
-    JSON.stringify(
-      {
-        built: new Date(),
-        topics: index,
-      },
-      null,
-      2
-    )
+    JSON.stringify({
+      built: new Date(),
+      topics: index,
+    })
   );
 
   console.log('Wrote config entrypoint');
