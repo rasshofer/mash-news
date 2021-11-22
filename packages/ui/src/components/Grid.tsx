@@ -23,6 +23,7 @@ export const Grid: FC<GridProps> = ({ items }) => {
     <div className="grid">
       {items.map((item) => (
         <a
+          key={item.id}
           href={item.url}
           target="_blank"
           rel="nofollow noopener noreferrer"
