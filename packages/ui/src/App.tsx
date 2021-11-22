@@ -16,6 +16,12 @@ import logo from './assets/img/logo.png';
 
 import './App.scss';
 
+const formatBuildDate = (built: string): string => {
+  const date = new Date(built);
+  const diff = Math.ceil(Math.max(Date.now() - date.getTime(), 0) / 1000 / 60);
+  return `~${diff} minute${diff === 1 ? '' : 's'}`;
+};
+
 const ScrollToTop: FC = () => {
   const history = useHistory();
 
@@ -67,11 +73,12 @@ export const App: FC = () => {
                 <>
                   <p>
                     Mash News is a mashup of the best sites on the internet
-                    aggregated for busy people.
+                    aggregated for busy people. All rights to the content remain
+                    with the linked authors.
                   </p>
-                  <p>
-                    All rights to the content remain with the linked authors.
-                  </p>
+                  {config?.built ? (
+                    <p>Last update was {formatBuildDate(config.built)} ago.</p>
+                  ) : null}
                 </>
               }
             />
