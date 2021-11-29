@@ -1,7 +1,12 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { decode } from 'he';
 import { Handler, Item } from './types';
 import { hashId, isValidUrl } from './utils';
+
+axiosRetry(axios, {
+  retries: 3,
+});
 
 const LIMIT = 100;
 
@@ -76,34 +81,41 @@ const getContentType = (item: RedditItem): Item['type'] => {
 export const handler =
   ({ mode, subreddit }: RedditProps): Handler =>
   async () => {
-    const { data } = await axios.get<RedditResult>(
-      mode
-        ? `https://www.reddit.com/${mode}/.json?limit=${LIMIT}`
-        : `https://www.reddit.com/r/${subreddit}/.json?limit=${LIMIT}`
-    );
+    try {
+      const { data } = await axios.get<RedditResult>(
+        mode
+          ? `https://www.reddit.com/${mode}/.json?limit=${LIMIT}`
+          : `https://www.reddit.com/r/${subreddit}/.json?limit=${LIMIT}`
+      );
 
-    return data.data.children
-      .map((item): Item => {
-        const image = decode(
-          item.data.preview?.images[0].source.url ??
-            (item.data.thumbnail !== 'self' ? item.data.thumbnail : '')
-        );
+      return data.data.children
+        .map((item): Item => {
+          const image = decode(
+            item.data.preview?.images[0].source.url ??
+              (item.data.thumbnail !== 'self' ? item.data.thumbnail : '')
+          );
 
-        return {
-          id: hashId('reddit', item.data.permalink),
-          type: getContentType(item),
-          url: decode(item.data.url),
-          title: decode(item.data.title),
-          image:
-            image && isValidUrl(image)
-              ? {
-                  url: image,
-                }
-              : undefined,
-          score: item.data.score || 0,
-          date: new Date(item.data.created * 1000),
-          source: 'reddit',
-        };
-      })
-      .filter((item) => isValidUrl(item.url));
+          return {
+            id: hashId('reddit', item.data.permalink),
+            type: getContentType(item),
+            url: decode(item.data.url),
+            title: decode(item.data.title),
+            image:
+              image && isValidUrl(image)
+                ? {
+                    url: image,
+                  }
+                : undefined,
+            score: item.data.score || 0,
+            date: new Date(item.data.created * 1000),
+            source: 'reddit',
+          };
+        })
+        .filter((item) => isValidUrl(item.url));
+    } catch (e) {
+      console.error(
+        `Error while importing "${mode ?? subreddit}" from Reddit: ${e.message}`
+      );
+      return [];
+    }
   };
