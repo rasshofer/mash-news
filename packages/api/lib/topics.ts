@@ -85,6 +85,91 @@ export const topics: Topic[] = [
     ],
   },
   {
+    emoji: '🚀',
+    slug: 'crypto',
+    title: 'Crypto',
+    feeds: [
+      reddit({
+        subreddit: 'cryptocurrency',
+      }),
+      reddit({
+        subreddit: 'cryptomarkets',
+      }),
+      reddit({
+        subreddit: 'bitcoinmarkets',
+      }),
+      reddit({
+        subreddit: 'cryptocurrencytrading',
+      }),
+      reddit({
+        subreddit: 'ethtrader',
+      }),
+      reddit({
+        subreddit: 'cryptocurrencies',
+      }),
+      reddit({
+        subreddit: 'altcoin',
+      }),
+      reddit({
+        subreddit: 'icocrypto',
+      }),
+      reddit({
+        subreddit: 'ico',
+      }),
+      reddit({
+        subreddit: 'bitcoin',
+      }),
+      reddit({
+        subreddit: 'btc',
+      }),
+      reddit({
+        subreddit: 'ethereum',
+      }),
+      reddit({
+        subreddit: 'ripple',
+      }),
+      reddit({
+        subreddit: 'litecoin',
+      }),
+      reddit({
+        subreddit: 'monero',
+      }),
+      reddit({
+        subreddit: 'stellar',
+      }),
+      reddit({
+        subreddit: 'binance',
+      }),
+      reddit({
+        subreddit: 'coinbase',
+      }),
+      reddit({
+        subreddit: 'ledgerwallet',
+      }),
+      reddit({
+        subreddit: 'defi',
+      }),
+      reddit({
+        subreddit: 'nft',
+      }),
+      reddit({
+        subreddit: 'opensea',
+      }),
+      reddit({
+        subreddit: 'rarible',
+      }),
+      reddit({
+        subreddit: 'foundation',
+      }),
+      reddit({
+        subreddit: 'cryptoart',
+      }),
+      reddit({
+        subreddit: 'decentraland',
+      }),
+    ],
+  },
+  {
     emoji: '📚️',
     slug: 'education',
     title: 'Education',
