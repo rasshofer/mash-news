@@ -2,7 +2,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { decode } from 'he';
 import { Handler, Item } from './types';
-import { hashId, isValidUrl } from './utils';
+import { hashId, isRelevant, isValidUrl } from './utils';
 
 axiosRetry(axios, {
   retries: 3,
@@ -56,7 +56,7 @@ export const handler =
             source: 'hackernews',
           })
         )
-        .filter((item) => isValidUrl(item.url));
+        .filter((item) => isValidUrl(item.url) && isRelevant(item));
     } catch (e) {
       console.error(
         `Error while importing "${mode}" from Hacker News: ${e.message}`
