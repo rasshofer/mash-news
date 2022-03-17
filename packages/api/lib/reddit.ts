@@ -2,7 +2,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { decode } from 'he';
 import { Handler, Item } from './types';
-import { hashId, isRelevant, isValidUrl } from './utils';
+import { cleanUp, hashId, isRelevant, isValidUrl } from './utils';
 
 axiosRetry(axios, {
   retries: 3,
@@ -99,7 +99,7 @@ export const handler =
             id: hashId('reddit', item.data.permalink),
             type: getContentType(item),
             url: decode(item.data.url),
-            title: decode(item.data.title),
+            title: cleanUp(decode(item.data.title)),
             image:
               image && isValidUrl(image)
                 ? {

@@ -23,3 +23,12 @@ export const isValidUrl = (url: string): boolean =>
 export const isRelevant = (item: Item): boolean => {
   return Date.now() - item.date.getTime() <= MAX_AGE;
 };
+
+export const cleanUp = (input: string): string =>
+  input
+    .trim()
+    .replace(/^\[OC\]/g, '')
+    .replace(/\[OC\]$/g, '')
+    .replace(/^\(OC\)/g, '')
+    .replace(/\(OC\)$/g, '')
+    .trim();
