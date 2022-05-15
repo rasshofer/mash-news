@@ -27,8 +27,8 @@ export const isRelevant = (item: Item): boolean => {
 export const cleanUp = (input: string): string =>
   input
     .trim()
-    .replace(/^\[OC\]/g, '')
-    .replace(/\[OC\]$/g, '')
-    .replace(/^\(OC\)/g, '')
-    .replace(/\(OC\)$/g, '')
+    .replace(/^\[OC\]/gi, '')
+    .replace(/\[OC\]$/gi, '')
+    .replace(/^\(OC\)/gi, '')
+    .replace(/\(OC\)$/gi, '')
     .trim();
