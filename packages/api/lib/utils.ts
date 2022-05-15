@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+import { URL } from 'url';
 import { Item } from './types';
 
 const MAX_AGE = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
@@ -24,11 +25,23 @@ export const isRelevant = (item: Item): boolean => {
   return Date.now() - item.date.getTime() <= MAX_AGE;
 };
 
-export const cleanUp = (input: string): string =>
+export const cleanUpTitle = (input: string): string =>
   input
     .trim()
-    .replace(/^\[OC\]/gi, '')
-    .replace(/\[OC\]$/gi, '')
-    .replace(/^\(OC\)/gi, '')
-    .replace(/\(OC\)$/gi, '')
+    .replace(/\[OC\]/gi, '')
+    .replace(/\(OC\)/gi, '')
+    .replace(/"OC"/gi, '')
+    .replace(/“OC”/gi, '')
+    .replace(/\s{2,}/, '')
     .trim();
+
+export const cleanUpUrl = (input: string): string => {
+  const cache = new URL(input);
+  const keys = Array.from(cache.searchParams.keys()).filter((key) =>
+    key.startsWith('utm_')
+  );
+  for (const key of keys) {
+    cache.searchParams.delete(key);
+  }
+  return cache.toString();
+};

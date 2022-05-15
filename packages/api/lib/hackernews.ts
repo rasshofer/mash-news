@@ -2,7 +2,13 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { decode } from 'he';
 import { Handler, Item } from './types';
-import { cleanUp, hashId, isRelevant, isValidUrl } from './utils';
+import {
+  cleanUpTitle,
+  cleanUpUrl,
+  hashId,
+  isRelevant,
+  isValidUrl,
+} from './utils';
 
 axiosRetry(axios, {
   retries: 3,
@@ -49,8 +55,10 @@ export const handler =
           (item): Item => ({
             id: hashId('hackernews', String(item.id)),
             type: 'article',
-            url: item.url ?? `https://news.ycombinator.com/item?id=${item.id}`,
-            title: cleanUp(decode(item.title)),
+            url: cleanUpUrl(
+              item.url ?? `https://news.ycombinator.com/item?id=${item.id}`
+            ),
+            title: cleanUpTitle(decode(item.title)),
             score: item.score || 0,
             date: new Date(item.time * 1000),
             source: 'hackernews',

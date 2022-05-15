@@ -1,8 +1,15 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { decode } from 'he';
+import { URL } from 'url';
 import { Handler, Item } from './types';
-import { cleanUp, hashId, isRelevant, isValidUrl } from './utils';
+import {
+  cleanUpTitle,
+  cleanUpUrl,
+  hashId,
+  isRelevant,
+  isValidUrl,
+} from './utils';
 
 axiosRetry(axios, {
   retries: 3,
@@ -94,12 +101,16 @@ export const handler =
             item.data.preview?.images[0].source.url ??
               (item.data.thumbnail !== 'self' ? item.data.thumbnail : '')
           );
+          const url = new URL(
+            decode(item.data.url),
+            'https://www.reddit.com'
+          ).toString();
 
           return {
             id: hashId('reddit', item.data.permalink),
             type: getContentType(item),
-            url: decode(item.data.url),
-            title: cleanUp(decode(item.data.title)),
+            url: cleanUpUrl(url),
+            title: cleanUpTitle(decode(item.data.title)),
             image:
               image && isValidUrl(image)
                 ? {
