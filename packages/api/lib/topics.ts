@@ -111,9 +111,6 @@ export const topics: Topic[] = [
         subreddit: 'altcoin',
       }),
       reddit({
-        subreddit: 'icocrypto',
-      }),
-      reddit({
         subreddit: 'ico',
       }),
       reddit({
