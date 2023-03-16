@@ -85,6 +85,40 @@ export const topics: Topic[] = [
     ],
   },
   {
+    emoji: '🤖',
+    slug: 'ai',
+    title: 'AI',
+    feeds: [
+      reddit({
+        subreddit: 'stablediffusion',
+      }),
+      reddit({
+        subreddit: 'midjourney',
+      }),
+      reddit({
+        subreddit: 'chatgpt',
+      }),
+      reddit({
+        subreddit: 'machinelearning',
+      }),
+      reddit({
+        subreddit: 'artificial',
+      }),
+      reddit({
+        subreddit: 'gpt3',
+      }),
+      reddit({
+        subreddit: 'gpt4',
+      }),
+      reddit({
+        subreddit: 'openai',
+      }),
+      reddit({
+        subreddit: 'promptengineering',
+      }),
+    ],
+  },
+  {
     emoji: '🚀',
     slug: 'crypto',
     title: 'Crypto',
