@@ -91,8 +91,8 @@ export const handler =
     try {
       const { data } = await axios.get<RedditResult>(
         mode
-          ? `https://www.reddit.com/${mode}/.json?limit=${LIMIT}`
-          : `https://www.reddit.com/r/${subreddit}/.json?limit=${LIMIT}`
+          ? `https://old.reddit.com/${mode}/.json?limit=${LIMIT}`
+          : `https://old.reddit.com/r/${subreddit}/.json?limit=${LIMIT}`
       );
 
       return data.data.children
